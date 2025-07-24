@@ -2,13 +2,14 @@ import Link from "next/link";
 import { cookies } from 'next/headers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
+import LogoutButton from "../LogoutButton";
 
 export default async function Navbar() {
     const token = cookies().get('token')?.value
     const username = cookies().get('username')?.value
 
     return (
-        <div className="flex justify-between items-center sticky top-0 z-10 px-24 py-3 bg-white">
+        <div className="flex justify-between items-center sticky top-0 z-10 px-10 md:px-24 md:py-3 bg-white">
             <div className="text-2xl font-bold">
                 <Link href={'/'}>
                     <div className="flex items-center">
@@ -18,9 +19,9 @@ export default async function Navbar() {
                 </Link>
             </div>
             <div className="flex gap-4 font-bold">
-                <Link href={'/'} className="hover:text-red-600">TRANG CHỦ</Link>
-                <Link href={'/courses'} className="hover:text-red-600">KHÓA HỌC</Link>
-                <Link href={'/about-us'} className="hover:text-red-600">GIỚI THIỆU</Link>
+                <Link href={'/'} className="hidden md:block hover:text-red-600">TRANG CHỦ</Link>
+                <Link href={'/courses'} className="hidden md:block hover:text-red-600">KHÓA HỌC</Link>
+                <Link href={'/about-us'} className="hidden md:block hover:text-red-600">GIỚI THIỆU</Link>
 
                 <div className="group relative hover:cursor-pointer">
                     <div>{token ? <p className="text-blue-700">{username}</p>
@@ -28,7 +29,7 @@ export default async function Navbar() {
                     </div>
                     {/* hover */}
                     <div className="group-hover:block hidden absolute">
-                        <div>ĐĂNG XUẤT</div>
+                        {token ? <LogoutButton /> : ''}
                     </div>
                 </div>
             </div>

@@ -28,12 +28,10 @@ export default function StudentReviewTimeline() {
 
   return (
     <div className="bg-neutral-900 text-white py-16">
-      <div className="relative max-w-5xl mx-auto px-4 before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-0.5 before:bg-gray-700">
+      <div className="relative max-w-5xl mx-auto px-4 before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-0.5 md:before:bg-gray-700">
         {reviews.map((r, idx) => (
-          <div
-            key={idx}
-            className={`mb-16 flex flex-col md:flex-row ${r.align === "left" ? "md:flex-row-reverse" : ""
-              } items-center md:items-start gap-6 md:gap-12`}
+          <div key={idx} className={`mb-16 flex flex-col md:flex-row ${r.align === "left" ? "md:flex-row-reverse" : ""}
+           items-center md:items-start gap-6 md:gap-12`}
           >
             {/* Avatar & info */}
             <div className="flex flex-col items-center text-center md:text-left md:w-1/2">

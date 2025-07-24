@@ -5,7 +5,7 @@ export default function LogoutButton() {
         <form action={logout}>
             <button
                 type="submit"
-                className="text-red-500 hover:underline"
+                className="text-white bg-blue-900 rounded-md hover:underline"
             >
                 Đăng xuất
             </button>
