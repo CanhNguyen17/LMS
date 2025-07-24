@@ -31,13 +31,13 @@ export default async function CourseDetailPage({ params }: { params: { id: strin
     const lessons = await getLessons(params.id)
 
     return (
-        <div className="min-h-screen bg-gray-50 px-6 md:px-24 py-10 space-y-10">
+        <div className="min-h-screen bg-gray-50 px-10 md:px-24 py-8 md:py-10 space-y-10">
             <h1 className="text-3xl font-bold text-blue-700 border-b border-gray-200 pb-4">
                 Bài học
             </h1>
 
             {lessons.map((item, index) => (
-                <div key={item._id} className="bg-white shadow rounded-lg p-6 space-y-4">
+                <div key={item._id} className="bg-white shadow rounded-lg px-4 md:p-6 space-y-4">
                     <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-3">
                         <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-700 rounded-full font-bold">
                             {index + 1}

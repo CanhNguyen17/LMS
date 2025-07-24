@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-100 text-gray-700 px-24 py-10">
+        <footer className="bg-gray-100 text-gray-700 px-10 md:px-24 py-10">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
                 {/* Logo hoặc tiêu đề */}
                 <div>

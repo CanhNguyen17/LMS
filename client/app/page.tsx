@@ -1,4 +1,3 @@
-import LogoutButton from '@/components/LogoutButton'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpenReader, faPlay, faUsers } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +7,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <div className='pt-4 px-24 pb-[120px]'
+      <div className='pt-4 px-10 md:px-24 pb-[120px]'
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.450), rgba(0, 0, 0, 0.500)),
             url(https://img.freepik.com/free-photo/friends-enjoying-lively-discussion-welldecorated-space_24972-2884.jpg?semt=ais_hybrid&w=740)`,
@@ -17,7 +16,7 @@ export default async function HomePage() {
         }}>
         <div className='flex flex-col py-6'>
           <p className='font-bold text-white'>THE BEST THEME FOR</p>
-          <p className='text-[80px] text-white'>EDUCATION</p>
+          <p className=' text-[60px] md:text-[80px] text-white'>EDUCATION</p>
           <Link href={'/courses'} className='w-[10%]'>
             <button className='p-2 bg-yellow-400 text-sm rounded-md hover:bg-yellow-600 hover:text-white'>
               HỌC NGAY
@@ -25,7 +24,7 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className='flex justify-center mt-24 gap-4 '>
+        <div className='flex flex-col md:flex-row items-center mt-10 md:mt-24 gap-4 '>
           <div className='flex justify-center items-center rounded-md p-7 bg-slate-800 w-[300px]  text-white'>
             <FontAwesomeIcon icon={faBookOpenReader} className="size-12 text-yellow-300" />
             <div className='pl-4'>
@@ -64,7 +63,6 @@ export default async function HomePage() {
       <div>
         <StudentReviewListStatic />
       </div>
-      <LogoutButton />
     </main>
   )
 }

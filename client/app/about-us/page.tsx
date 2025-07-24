@@ -1,6 +1,6 @@
 export default function AboutPage() {
     return (
-        <div className="bg-white min-h-screen px-6 py-12"
+        <div className="bg-white min-h-screen px-10 py-8 md:py-12"
             style={{
                 background: `linear-gradient(rgba(0, 0, 0, 0.650), rgba(0, 0, 0, 0.850)),
                  url(https://sontau.com/wp-content/uploads/2022/05/ve-chung-toi.png)`,
