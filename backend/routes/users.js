@@ -5,6 +5,7 @@ import isAdmin from '../middleware/role.js'
 
 const router = express.Router()
 
+//admin
 router.get('/', auth, isAdmin, getUser)
 router.post('/', auth, isAdmin, createUser)
 router.delete('/:id', auth, isAdmin, deleteUser)
