@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cookies } from 'next/headers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 import LogoutButton from "../LogoutButton";
 
 export default async function Navbar() {
@@ -32,6 +32,9 @@ export default async function Navbar() {
                         {token ? <LogoutButton /> : ''}
                     </div>
                 </div>
+                <Link href={'/cart'} className="hover:text-red-600">
+                    <FontAwesomeIcon icon={faCartShopping} className="size-6" />
+                </Link>
             </div>
         </div >
     )
