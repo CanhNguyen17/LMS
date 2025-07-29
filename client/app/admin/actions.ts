@@ -1,5 +1,5 @@
 'use server'
-
+import { revalidatePath } from 'next/cache' //re-render
 import { cookies } from 'next/headers'
 
 //Course
@@ -21,6 +21,8 @@ export async function createCourse(formData: FormData) {
     if (!res.ok) {
         throw new Error('Lỗi khi thêm khóa học')
     }
+    //
+    revalidatePath('/admin/all-courses')
 }
 
 export async function deleteCourse(id: string) {
@@ -36,6 +38,8 @@ export async function deleteCourse(id: string) {
     if (!res.ok) {
         throw new Error('Xóa khóa học thất bại')
     }
+    //
+    revalidatePath('/admin/all-courses')
 }
 
 //Lesson
@@ -59,6 +63,8 @@ export async function createLesson(formData: FormData) {
     if (!res.ok) {
         throw new Error('Lỗi khi thêm user')
     }
+    //
+    revalidatePath('/admin/all-lessons')
 }
 
 export async function deleteLesson(courseId: string, lessonId: string) {
@@ -76,6 +82,8 @@ export async function deleteLesson(courseId: string, lessonId: string) {
     if (!res.ok) {
         throw new Error('Xóa bai học thất bại')
     }
+    //
+    revalidatePath('/admin/all-lessons')
 }
 
 //User
@@ -97,6 +105,8 @@ export async function createUser(formData: FormData) {
     if (!res.ok) {
         throw new Error('Lỗi khi thêm user')
     }
+    //
+    revalidatePath('/admin/all-users')
 }
 
 export async function deleteUser(id: string) {
@@ -112,4 +122,6 @@ export async function deleteUser(id: string) {
     if (!res.ok) {
         throw new Error('Xóa khóa học thất bại')
     }
+    //
+    revalidatePath('/admin/all-users')
 }
