@@ -10,22 +10,25 @@ export default function CourseCard({ course }: { course: any }) {
     const [loading, setLoading] = useState(false);
 
     const addToCart = async (courseId: string) => {
+        //
+        const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+        //
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/cart/${courseId}`, {
+            const res = await fetch(`http://localhost:5000/api/cart/${courseId}`, {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer your_token`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
             if (res.ok) {
-                toast.success('Đã thêm vào giỏ hàng 🎉');
+                toast.success('Đã thêm vào giỏ hàng');
             } else {
-                toast.error('Thêm thất bại 😢');
+                toast.error('Thêm thất bại');
             }
         } catch (err) {
-            toast.error('Lỗi kết nối 😵');
+            toast.error('Lỗi kết nối');
         } finally {
             setLoading(false);
         }

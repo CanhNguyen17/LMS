@@ -8,6 +8,14 @@ export const addToCart = async (req, res) => {
         const courseId = req.params.id
 
         const course = await Course.findById(courseId)
+
+        console.log('[ADD TO CART DEBUG]', {
+            userId,
+            courseId,
+            title: course?.title,
+            price: course?.price,
+        });
+
         if (!course) {
             return res.status(404).json({ message: 'course not found' })
         }
