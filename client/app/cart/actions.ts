@@ -6,7 +6,7 @@ export async function getCartItems() {
     const token = cookies().get('token')?.value
     if (!token) return []
 
-    const res = await fetch('http://localhost:5000/cart', {
+    const res = await fetch('http://localhost:5000/api/cart', {
         headers: { Authorization: `Bearer ${token}` },
         cache: 'no-store',
     })
@@ -14,7 +14,7 @@ export async function getCartItems() {
 }
 
 export async function updateQuantity(id: string, type: 'increase' | 'decrease') {
-    await fetch(`http://localhost:5000/cart/${id}`, {
+    await fetch(`http://localhost:5000/api/cart/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: type }),
@@ -22,7 +22,7 @@ export async function updateQuantity(id: string, type: 'increase' | 'decrease') 
 }
 
 export async function deleteItem(id: string) {
-    await fetch(`http://localhost:5000/cart/${id}`, {
+    await fetch(`http://localhost:5000/api/cart/${id}`, {
         method: 'DELETE'
     })
 }

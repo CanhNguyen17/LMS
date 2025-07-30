@@ -17,7 +17,12 @@ export async function login(formData: FormData) {
     //
     if (res.ok && data.token && data.role && data.username) {
         const cookieStore = cookies()
-        cookieStore.set('token', data.token)
+        cookieStore.set('token', data.token, {
+            httpOnly: false,
+            secure: true,
+            path: '/',
+            maxAge: 60 * 60 * 24,
+        })
         cookieStore.set('role', data.role)
         cookieStore.set('username', data.username)
         redirect('/')
