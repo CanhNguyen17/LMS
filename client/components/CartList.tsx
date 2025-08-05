@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { updateQuantity, deleteItem } from '../../client/app/cart/actions'
-import { useRouter } from 'next/navigation'
 import { setCheckoutCookie } from '@/app/cart/actions'
 
 type CartItem = {
@@ -16,7 +15,6 @@ type CartItem = {
 
 export default function CartList({ items }: { items: CartItem[] }) {
     const [list, setList] = useState(items)
-    const router = useRouter()
 
     const handleUpdate = async (id: string, action: 'increase' | 'decrease') => {
         const product = list.find(i => i._id === id)
@@ -24,9 +22,10 @@ export default function CartList({ items }: { items: CartItem[] }) {
 
         await updateQuantity(id, action)
         setList(prev =>
-            prev.map(i => i._id === id
-                ? { ...i, quantity: action === 'increase' ? i.quantity + 1 : i.quantity - 1 }
-                : i
+            prev.map(i =>
+                i._id === id
+                    ? { ...i, quantity: action === 'increase' ? i.quantity + 1 : i.quantity - 1 }
+                    : i
             )
         )
     }
@@ -46,29 +45,46 @@ export default function CartList({ items }: { items: CartItem[] }) {
             {list.length > 0 ? (
                 <>
                     {list.map(item => (
-                        <div key={item._id} style={{ marginBottom: '1rem', borderBottom: '1px solid #ddd' }}>
-                            <img src={item.image} alt={item.title} width={80} />
-                            <p><strong>{item.title}</strong></p>
-                            <p>Giá: {item.price.toLocaleString()} đ</p>
-                            <div>
-                                <button onClick={() => handleUpdate(item._id, 'decrease')} disabled={item.quantity <= 1}>−</button>
-                                <span style={{ margin: '0 10px' }}>{item.quantity}</span>
-                                <button onClick={() => handleUpdate(item._id, 'increase')}>+</button>
+                        <div key={item._id} className="flex items-center gap-4 border-b py-4">
+                            <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded" />
+
+                            <div className="flex-1">
+                                <p className="font-semibold">{item.title}</p>
+                                <p className="text-sm text-gray-600">Giá: {item.price.toLocaleString()} đ</p>
+
+                                <div className="flex items-center gap-2 mt-2">
+                                    <button
+                                        onClick={() => handleUpdate(item._id, 'decrease')}
+                                        disabled={item.quantity <= 1}
+                                        className="px-2 py-1 bg-gray-200 rounded disabled:opacity-50"
+                                    >
+                                        −
+                                    </button>
+                                    <span>{item.quantity}</span>
+                                    <button
+                                        onClick={() => handleUpdate(item._id, 'increase')}
+                                        className="px-2 py-1 bg-gray-200 rounded"
+                                    >
+                                        +
+                                    </button>
+                                </div>
                             </div>
-                            <button onClick={() => handleDelete(item._id)}> Xoá sản phẩm</button>
+
+                            <button
+                                onClick={() => handleDelete(item._id)}
+                                className="text-red-500 hover:underline ml-auto"
+                            >
+                                Xoá
+                            </button>
                         </div>
                     ))}
 
                     <h3>Tổng tiền: {total.toLocaleString()} đ</h3>
-                    <button onClick={async () => {
-                        const data = {
-                            Items: list,
-                            quantity,
-                            total,
-                        }
-                        await setCheckoutCookie(data)
-                        router.push('/checkout')
-                    }}>Thanh toán</button>
+                    {/* // */}
+                    <form action={setCheckoutCookie}>
+                        <input type="hidden" name="data" value={JSON.stringify({ Items: list, quantity, total })} />
+                        <button type="submit">Thanh toán</button>
+                    </form>
                 </>
             ) : (
                 <div>
