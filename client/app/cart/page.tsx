@@ -1,4 +1,4 @@
-import CartList from '@/components/CartList'
+import CartList from './CartList'
 import { getCartItems } from './actions'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'

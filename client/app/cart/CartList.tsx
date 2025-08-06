@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { updateQuantity, deleteItem } from '../../client/app/cart/actions'
+import { updateQuantity, deleteItem } from '../../../client/app/cart/actions'
 import { setCheckoutCookie } from '@/app/cart/actions'
 
 type CartItem = {

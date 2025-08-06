@@ -1,6 +1,3 @@
-'use client'
-import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
 import { placeOrder } from './actions'
 
 type CartItem = {
@@ -19,29 +16,16 @@ type CheckoutData = {
 }
 
 export default function OrderForm({ data }: { data: CheckoutData }) {
-    const router = useRouter()
-    const [pending, startTransition] = useTransition()
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        startTransition(async () => {
-            const success = await placeOrder(data)
-            if (success) {
-                router.push('/order-success')
-            } else {
-                alert('Đặt hàng thất bại')
-            }
-        })
-    }
+    const jsonData = JSON.stringify(data)
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form action={placeOrder}>
+            <input type="hidden" name="data" value={jsonData} />
             <button
                 type="submit"
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-                disabled={pending}
+                className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
             >
-                {pending ? 'Đang xử lý...' : 'Xác nhận đặt hàng'}
+                Xác nhận đặt hàng
             </button>
         </form>
     )

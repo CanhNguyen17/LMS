@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.js'
 import courseRoutes from './routes/courses.js'
 import userRoutes from './routes/users.js'
 import cartRoutes from './routes/cart.js'
+import orderRoutes from './routes/order.js'
 
 dotenv.config()
 const app = express()
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/courses', courseRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/cart', cartRoutes)
+app.use('/api/order', orderRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
