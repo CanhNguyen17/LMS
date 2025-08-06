@@ -2,6 +2,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 // Đọc cookie checkout từ server
 export async function getCheckoutCookie() {
@@ -17,25 +18,24 @@ export async function getCheckoutCookie() {
 }
 
 // Gửi đơn hàng đến API
-export async function placeOrder(data: {
-    Items: Array<{
-        _id: string
-        title: string
-        image: string
-        price: number
-        quantity: number
-    }>
-    quantity: number
-    total: number
-}) {
+export async function placeOrder(formData: FormData) {
+    const token = cookies().get('token')?.value
+    //
+    const raw = formData.get('data') as string
+    if (!raw) throw new Error('Thiếu dữ liệu giỏ hàng')
+
+    const data = JSON.parse(raw)
+
     try {
-        const res = await fetch(`${process.env.API_URL}/order`, {
+        const res = await fetch(`http://localhost:5000/api/order`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-                products: data.Items.map(item => ({
-                    productId: item._id,
+                courses: data.Items.map((item: any) => ({
+                    courseId: item._id,
                     title: item.title,
                     image: item.image,
                     price: item.price,
@@ -46,11 +46,12 @@ export async function placeOrder(data: {
             }),
         })
 
-        if (!res.ok) throw new Error('Lỗi API')
+        if (!res.ok) throw new Error('API lỗi')
 
-        return true
+        //Sau khi đặt hàng thành công, chuyển hướng luôn từ server
+        redirect('/order-view')
     } catch (err) {
         console.error('Đặt hàng lỗi:', err)
-        return false
+        throw err
     }
 }
