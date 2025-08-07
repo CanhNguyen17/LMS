@@ -29,7 +29,11 @@ export default async function Navbar() {
                     </div>
                     {/* hover */}
                     <div className="group-hover:block hidden absolute">
-                        {token ? <LogoutButton /> : ''}
+                        {token ?
+                            <div className="bg-blue-900 rounded-md p-2 ">
+                                <Link href={'/order-view'} className="text-white hover:underline hover:text-red-500" >Đơn hàng</Link>
+                                <LogoutButton />
+                            </div> : ''}
                     </div>
                 </div>
                 <Link href={'/cart'} className="hover:text-red-600">
