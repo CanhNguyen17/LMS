@@ -10,7 +10,7 @@ export default async function CartPage() {
     const items = await getCartItems()
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="p-8 md:px-24">
             <h1>Trang Giỏ Hàng</h1>
             <CartList items={items} />
         </div>
